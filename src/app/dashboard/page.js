@@ -32,7 +32,7 @@ export default function Dashboard() {
     axios.defaults.headers.common['Content-Type'] = "application/json";
 
     useEffect(() => {
-        fetch("http://localhost:8000/token")
+        fetch("https://orca-app-wnq8y.ondigitalocean.app/token")
             .then(response => response.json())
             .then(data => {
                 setToken(data["token"])
@@ -44,7 +44,7 @@ export default function Dashboard() {
 
     useEffect(() => {
        
-        axios.get("http://localhost:8000/api/getPhrases")
+        axios.get("https://orca-app-wnq8y.ondigitalocean.app/api/getPhrases")
             .then(data => {
                 setPhrasesData(data.data.data)
             })
@@ -63,7 +63,7 @@ export default function Dashboard() {
         let isConfirm = confirm("Your delete the campaign # " + index)
         if(!isConfirm) return 
 
-        axios.delete("http://localhost:8000/api/deletePhrase/" + index)
+        axios.delete("https://orca-app-wnq8y.ondigitalocean.app/api/deletePhrase/" + index)
             .then(data => {
                 console.log(data.status);
                 if(data.status === 200) {
@@ -90,7 +90,7 @@ export default function Dashboard() {
         event.preventDefault();
 
           if (isEdit) {
-            axios.put("http://localhost:8000/api/editPhrase/" + indexEdit ,{
+            axios.put("https://orca-app-wnq8y.ondigitalocean.app/api/editPhrase/" + indexEdit ,{
                         "phrase": phraseDetail, 
                        })
                        .then(data => {
@@ -116,7 +116,7 @@ export default function Dashboard() {
                        })
 
           }else {
-              axios.post("http://localhost:8000/api/phrase",{
+              axios.post("https://orca-app-wnq8y.ondigitalocean.app/api/phrase",{
                            "phrase": phraseDetail,
                            "background": background,
                            "avatar":avatar
@@ -162,18 +162,18 @@ export default function Dashboard() {
     }
 
     const handleCreateImage = (id, size) => {
-        window.open("http://localhost:3000/template/" + id + "/" + size)
+        window.open("https://localstorage-window--aquamarine-mochi-2abaaf.netlify.app/template/" + id + "/" + size)
     }
 
     const handleLogOut = () => {
-        axios.post("http://localhost:8000/api/logout")
+        axios.post("https://orca-app-wnq8y.ondigitalocean.app/api/logout")
             .then(data => {
                 if(data.status === 200) {
                     typeof window !== "undefined" ? localStorage.removeItem("user"): null
                     typeof window !== "undefined" ? localStorage.removeItem("role"): null
                     typeof window !== "undefined" ? localStorage.removeItem("authorization"): null
                     typeof window !== "undefined" ? localStorage.removeItem("token"): null
-                    window.location.replace("http://localhost:3000/login")
+                    window.location.replace("https://localstorage-window--aquamarine-mochi-2abaaf.netlify.app/login")
                 }
             })
             .catch(error => console.log(error))
@@ -200,9 +200,9 @@ export default function Dashboard() {
             <button className='btn btn-danger' onClick={() => handleLogOut()}>Log out</button>
             <h2 className='m-2'>Campañas Activas: {phrasesData.length}</h2>
             <div className='d-flex justify-content-between w-50'>
-                <button className='btn btn-primary' onClick={() => window.location.replace("http://localhost:3000/images/1920X1080")}>Image 1920X1080</button>
-                <button className='btn btn-primary' onClick={() => window.location.replace("http://localhost:3000/images/1280X720")}>Image 1280X720</button>
-                <button className='btn btn-primary' onClick={() => window.location.replace("http://localhost:3000/images/720X480")}>Image 720X480</button>
+                <button className='btn btn-primary' onClick={() => window.location.replace("https://localstorage-window--aquamarine-mochi-2abaaf.netlify.app/images/1920X1080")}>Image 1920X1080</button>
+                <button className='btn btn-primary' onClick={() => window.location.replace("https://localstorage-window--aquamarine-mochi-2abaaf.netlify.app/images/1280X720")}>Image 1280X720</button>
+                <button className='btn btn-primary' onClick={() => window.location.replace("https://localstorage-window--aquamarine-mochi-2abaaf.netlify.app/images/720X480")}>Image 720X480</button>
             </div>
             {
                 role === "admin" ? 

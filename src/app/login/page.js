@@ -30,7 +30,7 @@ export default function Login() {
             'X-CSRF-TOKEN': csrfToken
           }
            
-           axios.post("http://localhost:8000/api/login",{"username": usernameRef.current.value, "password": passwordRef.current.value},headers)
+           axios.post("https://orca-app-wnq8y.ondigitalocean.app/api/login",{"username": usernameRef.current.value, "password": passwordRef.current.value},headers)
             .then(data => {
                 setToken(data.data.token);
                 typeof window !== "undefined" ? localStorage.setItem("authorization", data.data.token) : null
@@ -41,7 +41,7 @@ export default function Login() {
 
     if(typeof window !== "undefined") {
         if( localStorage.getItem("authorization")) {
-            window.location.replace("http://localhost:3000/dashboard")
+            window.location.replace("https://localstorage-window--aquamarine-mochi-2abaaf.netlify.app/dashboard")
         } 
     }
 
