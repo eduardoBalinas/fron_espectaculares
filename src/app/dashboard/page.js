@@ -31,6 +31,9 @@ export default function Dashboard() {
     axios.defaults.headers.common['X-CSRF-TOKEN'] = localStorage.getItem('token');
     axios.defaults.headers.common['Content-Type'] = "application/json";
 
+    if(!localStorage.getItem('authorization')) {
+        window.location.replace("http://localhost:3000/login")
+    }
     useEffect(() => {
         fetch("http://localhost:8000/token")
             .then(response => response.json())
