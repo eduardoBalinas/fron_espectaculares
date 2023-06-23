@@ -31,7 +31,7 @@ export default function Dashboard() {
     axios.defaults.headers.common['X-CSRF-TOKEN'] = typeof window !== "undefined" ?  localStorage.getItem("token") : null
     axios.defaults.headers.common['Content-Type'] = "application/json";
 
-    if(window !== "undefined") {
+    if(typeof window !== "undefined") {
         if(!localStorage.getItem("authorization")) {
             window.location.replace("https://localstorage-window--aquamarine-mochi-2abaaf.netlify.app/login")
         }
