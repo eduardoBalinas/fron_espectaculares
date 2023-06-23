@@ -3,7 +3,7 @@ import { useEffect } from "react"
 
 export default function Home() {
   useEffect(() => {
-    window.location.replace("http://localhost:3000/login")
+    window.location.replace("https://localstorage-window--aquamarine-mochi-2abaaf.netlify.app/login")
   },[])
   return (
     <div>
