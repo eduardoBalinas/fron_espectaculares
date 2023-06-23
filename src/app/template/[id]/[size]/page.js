@@ -11,8 +11,8 @@ export default function Template() {
   const id = pathname.split("/")[2];
   const size = pathname.split("/")[3] 
 
-  axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authorization')}`;
-  axios.defaults.headers.common['X-CSRF-TOKEN'] = localStorage.getItem('token');
+  axios.defaults.headers.common['Authorization'] = `Bearer ${typeof window !== "undefined" ?  localStorage.getItem("authorization") : null}`;
+  axios.defaults.headers.common['X-CSRF-TOKEN'] = typeof window !== "undefined" ?  localStorage.getItem("token") : null
   axios.defaults.headers.common['Content-Type'] = "application/json";
 
 

@@ -33,15 +33,17 @@ export default function Login() {
            axios.post("http://localhost:8000/api/login",{"username": usernameRef.current.value, "password": passwordRef.current.value},headers)
             .then(data => {
                 setToken(data.data.token);
-                localStorage.setItem("authorization", data.data.token)
-                localStorage.setItem("user",data.data.user.username)
-                localStorage.setItem("role", data.data.user.role)
+                typeof window !== "undefined" ? localStorage.setItem("authorization", data.data.token) : null
+                typeof window !== "undefined" ? localStorage.setItem("user",data.data.user.username) : null
+                typeof window !== "undefined" ? localStorage.setItem("role", data.data.user.role) : null
             })
     }
 
-    if( localStorage.getItem("authorization")) {
-        window.location.replace("http://localhost:3000/dashboard")
-    } 
+    if(typeof window !== "undefined") {
+        if( localStorage.getItem("authorization")) {
+            window.location.replace("http://localhost:3000/dashboard")
+        } 
+    }
 
     return(
         <div className="container d-flex justify-content-center mt-5">

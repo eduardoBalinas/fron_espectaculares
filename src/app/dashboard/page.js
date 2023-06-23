@@ -21,14 +21,14 @@ export default function Dashboard() {
     const [isSucess, setIsSuccess] = useState();
     const [isFailed, setIsFailed] = useState();
     const [isDelete, setIsDelete] = useState(false);
-    const [user, setUser] = useState(localStorage.getItem("user"));
-    const [role, setRole] = useState(localStorage.getItem("role"));
+    const [user, setUser] = useState(typeof window !== "undefined" ? localStorage.getItem("user"): null);
+    const [role, setRole] = useState(typeof window !== "undefined" ? localStorage.getItem("role"): null);
     const [ indexEdit, setIndexEdit ] = useState();
     const [ isEdit, setIsEdit ] = useState(false)
     let phraseRef = useRef()
     const uploader = Uploader({ apiKey: "public_12a1yMU4s52UarCh1oFyDsTMz9wU" });
-    axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('authorization')}`;
-    axios.defaults.headers.common['X-CSRF-TOKEN'] = localStorage.getItem('token');
+    axios.defaults.headers.common['Authorization'] = `Bearer ${typeof window !== "undefined" ?  localStorage.getItem("authorization") : null}`;
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = typeof window !== "undefined" ?  localStorage.getItem("token") : null
     axios.defaults.headers.common['Content-Type'] = "application/json";
 
     useEffect(() => {
@@ -36,7 +36,7 @@ export default function Dashboard() {
             .then(response => response.json())
             .then(data => {
                 setToken(data["token"])
-                localStorage.setItem("token", data["token"])
+                typeof window !== "undefined" ? localStorage.setItem("token", data["token"]) : null
             })
             .catch(error => console.log(error))    
 
@@ -169,10 +169,10 @@ export default function Dashboard() {
         axios.post("http://localhost:8000/api/logout")
             .then(data => {
                 if(data.status === 200) {
-                    localStorage.removeItem("user")
-                    localStorage.removeItem("role")
-                    localStorage.removeItem("authorization")
-                    localStorage.removeItem("token")
+                    typeof window !== "undefined" ? localStorage.removeItem("user"): null
+                    typeof window !== "undefined" ? localStorage.removeItem("role"): null
+                    typeof window !== "undefined" ? localStorage.removeItem("authorization"): null
+                    typeof window !== "undefined" ? localStorage.removeItem("token"): null
                     window.location.replace("http://localhost:3000/login")
                 }
             })
