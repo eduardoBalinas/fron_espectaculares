@@ -10,4 +10,4 @@ export default function Home() {
       <h1>Soy el home</h1>
     </div>
   )
-}
+} 
