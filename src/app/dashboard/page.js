@@ -31,6 +31,12 @@ export default function Dashboard() {
     axios.defaults.headers.common['X-CSRF-TOKEN'] = typeof window !== "undefined" ?  localStorage.getItem("token") : null
     axios.defaults.headers.common['Content-Type'] = "application/json";
 
+    if(window !== "undefined") {
+        if(!localStorage.getItem("authorization")) {
+            window.location.replace("https://localstorage-window--aquamarine-mochi-2abaaf.netlify.app/login")
+        }
+    }
+
     useEffect(() => {
         fetch("https://orca-app-wnq8y.ondigitalocean.app/token")
             .then(response => response.json())
